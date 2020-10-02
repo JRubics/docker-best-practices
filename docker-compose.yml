@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  back:
+    build: ./back
+    restart: unless-stopped
+    container_name: back
+    environment:
+      - PERSON=DevOps
+    ports:
+      - 5000:5000
+  front:
+    build: ./front
+    image: front
+    restart: unless-stopped
+    container_name: front
+    ports:
+      - 8000:80
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    container_name: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data
+
+volumes:
+  redis:
