@@ -1,11 +1,15 @@
 FROM node:alpine as builder
 
 WORKDIR /app
-COPY . /app
+
+COPY package.json yarn.lock ./
+
 RUN set -ex \
 	&& apk add --no-cache yarn \
-	&& yarn install \
-	&& yarn run build
+	&& yarn install
+
+COPY ./ ./
+RUN yarn run build
 
 # Stage 2
 FROM nginx:alpine

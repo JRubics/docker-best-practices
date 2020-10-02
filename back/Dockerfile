@@ -15,7 +15,7 @@ RUN  set -ex \
     && pip install poetry \
     && poetry config virtualenvs.in-project true
 
-COPY poetry.lock pyproject.toml /app/
+COPY poetry.lock pyproject.toml ./
 
 RUN poetry install --no-root --no-dev \
     && apk del .build-deps
@@ -29,5 +29,5 @@ ENV PATH="/app/.venv/bin:$PATH"
 EXPOSE 5000
 ENTRYPOINT [ "flask", "run", "--host", "0.0.0.0" ] 
 
-COPY ./ ./
 COPY --from=builder /app/ ./
+COPY ./ ./
