@@ -1,4 +1,7 @@
 pipeline {
+    environment { 
+        tag = "JRubics/test:latest" 
+    }
     agent any
     stages {
         stage('Cloning from Git') { 
@@ -16,7 +19,7 @@ pipeline {
         stage('Stage two') {
             steps {
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                    dockerImage = docker.build tag
                 }
             }
         }
