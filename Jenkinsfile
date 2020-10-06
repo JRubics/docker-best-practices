@@ -8,18 +8,11 @@ pipeline {
             steps { 
                 git 'https://github.com/JRubics/docker-best-practices.git' 
             }
-        } 
-        stage('Stage one') {
-            steps {
-                script {
-                    echo "Hello"
-                }
-            }
         }
-        stage('Stage two') {
+        stage('Docker build') {
             steps {
                 script {
-                    dockerImage = docker.build tag
+                    sh "ls -la"
                 }
             }
         }
