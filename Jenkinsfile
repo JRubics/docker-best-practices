@@ -16,7 +16,7 @@ pipeline {
         stage('Stage two') {
             steps {
                 script {
-                    sh "docker build . -t test"
+                    sh "docker build docker-best-practices/. -t test"
                     sh "docker images"
                 }
             }
