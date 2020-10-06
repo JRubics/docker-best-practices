@@ -11,7 +11,7 @@ pipeline {
         stage('Stage two') {
             steps {
                 script {
-                    echo "asdf1"
+                    cat README.md
                 }
             }
         }
