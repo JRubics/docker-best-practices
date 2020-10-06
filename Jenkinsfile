@@ -16,7 +16,7 @@ pipeline {
         stage('Stage two') {
             steps {
                 script {
-                    cat README.md
+                    ls
                 }
             }
         }
