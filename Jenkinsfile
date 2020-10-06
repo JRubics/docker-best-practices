@@ -16,8 +16,7 @@ pipeline {
         stage('Stage two') {
             steps {
                 script {
-                    sh "docker build docker-best-practices/. -t test"
-                    sh "docker images"
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                 }
             }
         }
