@@ -12,7 +12,7 @@ pipeline {
         stage('Docker build') {
             steps {
                 script {
-                    sh "ls -la"
+                    sh "docker build ./back -t test"
                 }
             }
         }
