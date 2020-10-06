@@ -1,6 +1,6 @@
 pipeline {
     environment { 
-        tag = "JRubics/test:latest" 
+        tag = "jrubics/test:latest" 
     }
     agent any
     stages {
