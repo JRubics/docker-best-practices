@@ -16,7 +16,8 @@ pipeline {
         stage('Stage two') {
             steps {
                 script {
-                    ls
+                    sh "docker build . -t test"
+                    sh "docker images"
                 }
             }
         }
