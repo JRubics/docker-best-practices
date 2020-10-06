@@ -4,14 +4,14 @@ pipeline {
         stage('Stage one') {
             steps {
                 script {
-                    echo "Parameter from template creation: " + templateParams.someParam
+                    echo "Hello"
                 }
             }
         }
         stage('Stage two') {
             steps {
                 script {
-                    echo "Job input parameter: " + params.myInput
+                    echo "asdf"
                 }
             }
         }
