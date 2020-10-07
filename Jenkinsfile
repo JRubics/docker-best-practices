@@ -3,6 +3,9 @@ pipeline {
     parameters {
         string(name:"tag", defaultValue: 'latest', description: "Docker image tag")
     }
+    environment {
+        DOCKER_HUB = credentials('docker-hub')
+    }
     stages {
         stage('Docker build') {
             steps {
@@ -11,11 +14,7 @@ pipeline {
         }
         stage('Docker login') {
             steps {
-                withCredentials ([
-                    usernamePassword(credentials: 'docker-hub', usernameVariable: USER, passwordVariable: PASS)
-                ]) {
-                    sh "docker login -u=$USER -p=$PASS" 
-                }
+                sh "docker login -u=${DOCKER_HUB_USR} -p=DOCKER_HUB_PSW"
             }
         }
         stage('Docker push') {
