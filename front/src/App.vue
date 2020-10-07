@@ -18,7 +18,7 @@ export default {
 	},
 
   mounted() {
-    Axios.get("http://localhost:5000/api").then((response) => {
+    Axios.get("http://192.168.71.81:5000/api").then((response) => {
       this.name = response.data.name
       this.visits = response.data.visits
 		}).catch((error) => {
