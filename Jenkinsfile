@@ -9,10 +9,11 @@ pipeline {
                 git 'https://github.com/JRubics/docker-best-practices.git' 
             }
         }
-        stage('Docker build') {
+        stage('Docker run') {
             steps {
                 script {
-                    sh "docker build ./back -t test"
+                    sh "docker-compose build"
+                    sh "docker-compose up -d"
                 }
             }
         }
