@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Docker push') {
             steps {
-                docker push jrubics/jenkins-test:{$params.tag}
+                docker push "jrubics/jenkins-test:${params.tag}"
             }
         }
     }
