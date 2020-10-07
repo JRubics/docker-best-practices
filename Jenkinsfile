@@ -4,9 +4,20 @@ pipeline {
     }
     agent any
     stages {
-        stage('Cloning from Git') { 
+        stage('Cloning from Git master') {
+            when {
+                branch 'master'
+            }
             steps { 
-                git 'https://github.com/JRubics/docker-best-practices.git' 
+                sh "git clone https://github.com/JRubics/docker-best-practices.git"
+            }
+        }
+        stage('Cloning from Git test') {
+            when {
+                branch 'test'
+            }
+            steps { 
+                sh "git clone -b test https://github.com/JRubics/docker-best-practices.git"
             }
         }
         stage('Docker run') {
