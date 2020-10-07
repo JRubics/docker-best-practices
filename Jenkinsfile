@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Docker build') {
             steps {
-                docker build  ./back/ -t "fe:latest"
+                sh "docker build  ./back/ -t fe:latest"
             }
         }
         stage('Docker login') {
@@ -14,13 +14,13 @@ pipeline {
                 withCredentials ([
                     usernamePassword(credentials: 'docker-hub', usernameVariable: USER, passwordVariable: PASS)
                 ]) {
-                    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+                    sh "docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD 
                 }
             }
         }
         stage('Docker push') {
             steps {
-                docker push "jrubics/jenkins-test:${params.tag}"
+                sh "docker push jrubics/jenkins-test:${params.tag}"
             }
         }
     }
