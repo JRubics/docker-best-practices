@@ -1,31 +1,26 @@
 pipeline {
-    environment { 
-        tag = "jrubics/test:latest" 
-    }
     agent any
+    parameters {
+        string(name:"tag", defaulValue: 'latest', description: "Docker image tag")
+    }
     stages {
-        stage('Cloning from Git master') {
-            when {
-                branch 'master'
-            }
-            steps { 
-                sh "git clone https://github.com/JRubics/docker-best-practices.git"
-            }
-        }
-        stage('Cloning from Git test') {
-            when {
-                branch 'test'
-            }
-            steps { 
-                sh "git clone -b test https://github.com/JRubics/docker-best-practices.git"
-            }
-        }
-        stage('Docker run') {
+        stage('Docker build') {
             steps {
-                script {
-                    sh "docker-compose build"
-                    sh "docker-compose up -d"
+                docker build  ./back/ -t fe:latest
+            }
+        }
+        stage('Docker login') {
+            steps {
+                withCredentials ([
+                    usernamePassword(credentials: 'docker-hub', usernameVariable: USER, passwordVariable: PASS)
+                ]) {
+                    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
                 }
+            }
+        }
+        stage('Docker push') {
+            steps {
+                docker push jrubics/jenkins-test:{$params.tag}
             }
         }
     }
