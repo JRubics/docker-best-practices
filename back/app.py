@@ -9,6 +9,7 @@ redis = Redis(host="redis", port='6379', db=0, socket_connect_timeout=2, socket_
 
 app = Flask(__name__)
 CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route("/api")
 def hello():
