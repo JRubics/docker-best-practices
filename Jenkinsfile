@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Docker build') {
             steps {
-                docker build  ./back/ -t fe:latest
+                docker build  ./back/ -t "fe:latest"
             }
         }
         stage('Docker login') {
