@@ -1,4 +1,4 @@
-FROM node:alpine as builder
+FROM node:12.19.0-alpine3.12 as builder
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY ./ ./
 RUN yarn run build
 
 # Stage 2
-FROM nginx:alpine
+FROM nginx:1.19-alpine
 
 COPY --from=builder /app/dist /app
 COPY nginx.conf /etc/nginx/conf.d
